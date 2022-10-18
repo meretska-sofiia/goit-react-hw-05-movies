@@ -1,5 +1,8 @@
 import { searchMovieReview } from 'api/requests';
-import { useState, useParams, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { List } from './Reviews.styled';
+import { Container } from 'pages/Layout/Layout.styled';
 
 const Reviews = () => {
   const [review, setReview] = useState([]);
@@ -15,24 +18,41 @@ const Reviews = () => {
     }
   }, [movieId]);
 
-  //   useEffect(() => {
-  //     fetchReview();
-  //   }, [fetchReview]);
+  useEffect(() => {
+    fetchReview();
+  }, [fetchReview]);
+
+  if (error) {
+    return (
+      <Container>
+        <p>Something went wrong...</p>
+      </Container>
+    );
+  }
 
   if (!review) {
-    return;
+    return (
+      <Container>
+        <p>We don't have any reviews for this movie</p>
+      </Container>
+    );
   }
 
   return (
-    <div>hello</div>
-    //     <ul>
-    //       {review.map(({ author, content, id }) => (
-    //         <li key={id}>
-    //           <h2>{author && author}</h2>
-    //           <p>{content && content}</p>
-    //         </li>
-    //       ))}
-    //     </ul>
+    <Container>
+      {review.length !== 0 ? (
+        <List>
+          {review.map(({ author, content, id }) => (
+            <li key={id}>
+              <h2>{author && author}</h2>
+              <p>{content && content}</p>
+            </li>
+          ))}
+        </List>
+      ) : (
+        <p>We don't have any reviews for this movie</p>
+      )}
+    </Container>
   );
 };
 export default Reviews;

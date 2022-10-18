@@ -1,10 +1,14 @@
 import { serchMovieCast } from 'api/requests';
-import { useState, useEffect, useCallback, useParams } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { useParams } from 'react-router-dom';
 import { CastList, CastItem, Image } from './Cast.styled';
+import { Container } from 'pages/Layout/Layout.styled';
+import image from 'images/images.jpeg';
 
 const Cast = () => {
   const [cast, setCast] = useState([]);
   const [error, setError] = useState('');
+
   const { movieId } = useParams();
 
   const fetchCast = useCallback(async () => {
@@ -20,24 +24,34 @@ const Cast = () => {
     fetchCast();
   }, [fetchCast]);
 
-  if (!cast) {
-    return;
+  if (error) {
+    return (
+      <Container>
+        <p>Something went wrong...</p>
+      </Container>
+    );
   }
 
   return (
     <CastList>
-      {cast.map(({ name, profile_path, character, id }) => (
-        <CastItem key={id}>
-          <Image
-            src={
-              profile_path && `https://image.tmdb.org/t/p/w500${profile_path}`
-            }
-            alt={name}
-          />
-          <h2>{name}</h2>
-          <p>Character: {character}</p>
-        </CastItem>
-      ))}
+      {cast &&
+        cast.map(({ name, profile_path, character, id }) => (
+          <CastItem key={id}>
+            <Image
+              src={
+                profile_path
+                  ? `https://image.tmdb.org/t/p/w500${profile_path}`
+                  : image
+              }
+              alt={name}
+            />
+            <div>
+              <h2>{name}</h2>
+
+              <p>Character: {character}</p>
+            </div>
+          </CastItem>
+        ))}
     </CastList>
   );
 };
