@@ -1,10 +1,11 @@
 import { useEffect, useState, useCallback } from 'react';
+import { useSearchParams } from 'react-router-dom';
+
 import { searchMoviesByName } from 'api/requests';
 import MovieList from 'components/MovieList/MovieList';
+
 import { Form, Input, Button } from './Movies.styled';
 import { Container } from 'pages/Layout/Layout.styled';
-
-import { useSearchParams } from 'react-router-dom';
 
 const Movies = () => {
   const [searchQuery, setSearchQuery] = useState('');

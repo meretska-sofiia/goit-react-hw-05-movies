@@ -1,6 +1,8 @@
-import { serchMovieCast } from 'api/requests';
 import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
+
+import { serchMovieCast } from 'api/requests';
+
 import { CastList, CastItem, Image } from './Cast.styled';
 import { Container } from 'pages/Layout/Layout.styled';
 import image from 'images/images.jpeg';
@@ -8,7 +10,6 @@ import image from 'images/images.jpeg';
 const Cast = () => {
   const [cast, setCast] = useState([]);
   const [error, setError] = useState('');
-
   const { movieId } = useParams();
 
   const fetchCast = useCallback(async () => {
@@ -34,7 +35,7 @@ const Cast = () => {
 
   return (
     <CastList>
-      {cast &&
+      {cast.length > 0 &&
         cast.map(({ name, profile_path, character, id }) => (
           <CastItem key={id}>
             <Image

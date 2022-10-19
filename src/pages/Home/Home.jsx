@@ -1,6 +1,8 @@
+import { useState, useEffect, useCallback } from 'react';
+
 import { searchPopularMovies } from 'api/requests';
 import MovieList from 'components/MovieList/MovieList';
-import { useState, useEffect, useCallback } from 'react';
+
 import { Title } from './Home.styled';
 import { Container } from 'pages/Layout/Layout.styled';
 
@@ -19,7 +21,7 @@ const Home = () => {
   return (
     <Container>
       <Title>Trending today:</Title>
-      {movies ? <MovieList movieList={movies} /> : null}
+      {movies && <MovieList movieList={movies} />}
     </Container>
   );
 };

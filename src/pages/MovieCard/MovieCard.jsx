@@ -1,7 +1,8 @@
-import { searchMovieById } from 'api/requests';
 import { useCallback, useRef, useEffect, useState } from 'react';
-
 import { Outlet, useLocation, useParams } from 'react-router-dom';
+
+import { searchMovieById } from 'api/requests';
+
 import { Container } from 'pages/Layout/Layout.styled';
 import {
   Image,
@@ -63,16 +64,16 @@ const MovieCard = () => {
               alt={title}
             />
             <Description>
-              <h2>
-                {movieDetails
-                  ? `${title}(${new Date(release_date).getFullYear()})`
-                  : null}
-              </h2>
+              <h2>{`${title}(${new Date(release_date).getFullYear()})`}</h2>
               <p>User score: {Math.ceil(vote_average * 10)} %</p>
               <h2>Overview</h2>
               <p>{overview}</p>
               <h2>Genres</h2>
-              <p>{genres ? genres.map(genre => genre.name).join(' ') : '-'}</p>
+              <p>
+                {genres?.length > 0
+                  ? genres.map(genre => genre.name).join(' ')
+                  : '-'}
+              </p>
             </Description>
           </CardWrapper>
         </Container>

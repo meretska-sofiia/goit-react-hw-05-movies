@@ -1,6 +1,7 @@
-import { Outlet } from 'react-router-dom';
-import { Header, StyledLink, Container } from './Layout.styled';
 import { Suspense } from 'react';
+import { Outlet } from 'react-router-dom';
+
+import { Header, StyledLink, Container } from './Layout.styled';
 
 const Layout = () => {
   return (

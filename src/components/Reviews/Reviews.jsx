@@ -1,6 +1,8 @@
-import { searchMovieReview } from 'api/requests';
 import { useState, useCallback, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+
+import { searchMovieReview } from 'api/requests';
+
 import { List } from './Reviews.styled';
 import { Container } from 'pages/Layout/Layout.styled';
 
@@ -26,14 +28,6 @@ const Reviews = () => {
     return (
       <Container>
         <p>Something went wrong...</p>
-      </Container>
-    );
-  }
-
-  if (!review) {
-    return (
-      <Container>
-        <p>We don't have any reviews for this movie</p>
       </Container>
     );
   }

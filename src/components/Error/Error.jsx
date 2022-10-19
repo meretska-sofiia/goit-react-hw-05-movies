@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Container } from 'pages/Layout/Layout.styled';
 import { LingGoBack } from 'pages/MovieCard/MovieCard.styled';
 import { Title } from 'pages/Home/Home.styled';
